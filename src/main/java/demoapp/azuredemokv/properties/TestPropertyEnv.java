@@ -15,7 +15,7 @@ public class TestPropertyEnv {
     private Environment env;
 
     public String getSecret() {
-        String s = env.getProperty("test");
+        String s = env.getProperty("greencity.keyvault.secret");
         if (s == null || s.isBlank()) {
             log.warn("secret missing, fallback to default");
             return "default-secret";

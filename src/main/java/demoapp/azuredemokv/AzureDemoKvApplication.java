@@ -16,11 +16,12 @@ import org.springframework.scheduling.annotation.Scheduled;
 @Slf4j
 @SpringBootApplication
 @EnableScheduling
+@RequiredArgsConstructor
 public class AzureDemoKvApplication {
-    @Autowired
-    private Environment env;
+//    @Autowired
+//    private Environment env;
 //    private final TestProperties testProperties;
-//    private final TestPropertyEnv testPropertyEnv;
+    private final TestPropertyEnv testPropertyEnv;
 //    @Value("${greencity.secret.name}")
 //    private String secretName;
 
@@ -30,6 +31,6 @@ public class AzureDemoKvApplication {
 
     @Scheduled(fixedRate = 3000)
     public void logSecret() {
-        log.info("Secret from KV = {}", env.getProperty("greencity.keyvault.secret"));
+        log.info("Secret from KV = {}", testPropertyEnv.getSecret());
     }
 }
