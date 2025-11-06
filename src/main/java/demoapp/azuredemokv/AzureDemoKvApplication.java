@@ -1,26 +1,35 @@
 package demoapp.azuredemokv;
 
+import demoapp.azuredemokv.properties.TestProperties;
+import demoapp.azuredemokv.properties.TestPropertyEnv;
 import jakarta.annotation.PostConstruct;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.core.env.Environment;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 
 @Slf4j
 @SpringBootApplication
+@EnableScheduling
 public class AzureDemoKvApplication {
-    @Value("${greencity.keyvault.secret}")
-    private String secretValue;
-    @Value("${greencity.secret.name}")
-    private String secretName;
+    @Autowired
+    private Environment env;
+//    private final TestProperties testProperties;
+//    private final TestPropertyEnv testPropertyEnv;
+//    @Value("${greencity.secret.name}")
+//    private String secretName;
 
     public static void main(String[] args) {
         SpringApplication.run(AzureDemoKvApplication.class, args);
     }
 
-    @PostConstruct
+    @Scheduled(fixedRate = 3000)
     public void logSecret() {
-        log.info("Secret from KV = {}", secretValue);
-        log.info("Secret name = {}", secretName);
+        log.info("Secret from KV = {}", env.getProperty("greencity.keyvault.secret"));
     }
 }
