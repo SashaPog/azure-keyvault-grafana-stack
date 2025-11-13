@@ -8,6 +8,7 @@ services:
       - "8080:8080"
     networks:
       - monitoring
+#TODO change to work with dev properties
 
   prometheus:
     image: prom/prometheus:v3.5.0
