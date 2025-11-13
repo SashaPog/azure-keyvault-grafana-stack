@@ -20,7 +20,7 @@ A Spring Boot application demonstrating **Azure Key Vault with hot refresh** wit
 
 1. Clone and configure:
    ```bash
-   git clone https://github.com/SashaPog/Azure-Playground.git
+   git clone [https://github.com/SashaPog/Azure-Playground.git](https://github.com/SashaPog/azure-keyvault-grafana-stack.git)
    cd Azure-Playground
    ```
 
