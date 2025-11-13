@@ -37,3 +37,7 @@ build/
 .vscode/
 src/main/resources/static/
 src/main/resources/application.properties
+
+.env
+data/grafana/
+!data/grafana/grafana.yml

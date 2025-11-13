@@ -1,0 +1,32 @@
+
+# A scrape config containing exactly one endpoint to scrape:
+# Here it`s Prometheus itself
+scrape_configs:
+  # The job name is added as a label job=<job_name> to any timeseries scraped from this config
+  - job_name: 'prometheus'
+    # Override the global default and scrape target from this job every 5 sec
+    scrape_interval: 5s
+    # metrics_path: default to '/metrics'
+    # scheme defaults to 'http'.
+    static_configs:
+      - targets: ['localhost:9090', 'localhost:8080', 'localhost:9010', 'localhost:9113']
+
+  - job_name: 'Spring Boot Application input'
+    metrics_path: '/actuator/prometheus'
+    scrape_interval: 2s
+    static_configs:
+      # that (host.docker.internal) need to get application from my pc not from docker
+      # we can use 'AzureDemoKV:8080' to get from docker but should do docker container for seervice
+      - targets: ['azure-playground:8080']
+        labels:
+          application: "My Spring Boot Application"
+
+  # Example how we can use several microservice
+
+#  - job_name: 'Spring Boot Application input'
+#    metrics_path: '/actuator/prometheus'
+#    scrape_interval: 2s
+#    static_configs:
+#      - targets: [ 'host.docker.internal:8060' ]
+#        labels:
+#          application: "My Spring Boot Application"
