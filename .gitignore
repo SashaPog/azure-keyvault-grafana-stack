@@ -40,3 +40,4 @@ src/main/resources/application.properties
 
 .env
 data/grafana/
+!data/grafana/grafana.yml
