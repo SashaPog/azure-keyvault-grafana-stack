@@ -39,3 +39,4 @@ src/main/resources/static/
 src/main/resources/application.properties
 
 .env
+data/grafana/
