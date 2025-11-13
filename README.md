@@ -1,65 +1,77 @@
-# 🔐 Azure Key Vault Playground
+# Azure Playground
 
-This project demonstrates how to retrieve secrets from **Azure Key Vault** in a local development environment.  
-You’ll learn how to configure Azure resources, authenticate with Azure, and run the application directly from IntelliJ IDEA.
+A Spring Boot application demonstrating **Azure Key Vault with hot refresh** with monitoring stack: **Grafana, Prometheus, Promtail, and Loki**.
 
----
+## Features
 
-## 🚀 Overview
+- Azure Key Vault integration with automatic configuration refresh
+- Complete monitoring and logging solution
+- Docker Compose setup for easy deployment
 
-The app connects to an Azure Key Vault instance and reads secrets using the Azure SDK.  
-You can authenticate in two ways:
+## Prerequisites
 
-1. **Azure CLI Authentication** — uses your logged-in Azure user (`az login`).
-2. **Service Principal Authentication** — uses `Client ID`, `Tenant ID`, and `Client Secret` via environment variables.
+- Java 21
+- Azure account with Key Vault access
+- Docker & Docker Compose (for containerized deployment)
 
----
+## Quick Start
 
-## 🧩 Requirements
+### Running with Docker Compose
 
-- Azure account
-- Azure CLI installed  
-- Java 21 
-- IntelliJ IDEA  
-- Git
+1. Clone and configure:
+   ```bash
+   git clone https://github.com/SashaPog/Azure-Playground.git
+   cd Azure-Playground
+   ```
 
----
+2. Create `.env` file:
+   ```env
+   PROFILE=dev
+   AZURE_CLIENT_ID=your-client-id
+   AZURE_TENANT_ID=your-tenant-id
+   AZURE_CLIENT_SECRET=your-client-secret
+   KEY_VAULT_NAME=your-keyvault-name
+   ```
 
-## Create a Resource Group
+3. Start services:
+   ```bash
+   docker-compose up -d
+   ```
 
-## Create a Key Vault
+4. Access:
+   - Application: http://localhost:8080
+   - Grafana: http://localhost:3000 (admin/admin)
+   - Prometheus: http://localhost:9090
 
-## Add a Secret
+### Running Locally (Without Docker)
 
-## Register an Application in Azure Entra id and create Client Secret
-
-## take client tenant secret ids and take keyVaultUrl
-
-## Grant Access to the Key Vault for application
-
-## Two Ways to Run the App
-
-1. Option 1
-- Log in:
+**Option 1: Azure CLI**
+comment this lines
+spring.cloud.azure.credential.client-id=${AZURE_CLIENT_ID}
+spring.cloud.azure.credential.client-secret=${AZURE_SECRET_ID}
+spring.cloud.azure.profile.tenant-id=${AZURE_TENANT_ID}
+```bash
 az login
+export PROFILE=dev
+./mvnw spring-boot:run
+```
 
--Open application.properties and comment out these three lines:
-spring.cloud.azure.credential.client-id=...
-spring.cloud.azure.credential.client-secret=...
-spring.cloud.azure.profile.tenant-id=...
+**Option 2: Environment Variables**
+```bash
+export PROFILE=dev
+export AZURE_CLIENT_ID=your-client-id
+export AZURE_TENANT_ID=your-tenant-id
+export AZURE_CLIENT_SECRET=your-client-secret
+export KEY_VAULT_NAME=your-keyvault-name
+./mvnw spring-boot:run
+```
 
-2. Option 2: Using Environment Variables
+## Monitoring
 
-If you don’t want to use az login, set credentials manually.
+After starting with Docker Compose, configure Grafana data sources:
+- **Prometheus**: `http://prometheus:9090`
+- **Loki**: `http://loki:3100`
 
-In IntelliJ IDEA:
-Run → Edit Configurations → Environment variables:
+## Hot Refresh
 
-AZURE_CLIENT_ID=<your-appId>
-AZURE_TENANT_ID=<your-tenantId>
-AZURE_CLIENT_SECRET=<your-password>
-KEY_VAULT_NAME=kv-demo-playground
-
-Then run the app normally.
-
-update readme
+Update secrets in Azure Key Vault and the application automatically picks up changes without restart.
