@@ -7,5 +7,7 @@ pool:
   name: Default
 
 steps:
-  - script: echo "Hello World!"
-    displayName: Hello
+  - script: |
+      echo "Вміст файлу test.txt:"
+      cat test.txt
+    displayName: "Read test.txt file"
