@@ -14,6 +14,8 @@ A Spring Boot application demonstrating **Azure Key Vault with hot refresh** wit
 - Azure account with Key Vault access
 - Docker & Docker Compose (for containerized deployment)
 
+
+
 ## Quick Start
 
 ### Running with Docker Compose
@@ -23,6 +25,8 @@ A Spring Boot application demonstrating **Azure Key Vault with hot refresh** wit
    git clone [https://github.com/SashaPog/Azure-Playground.git](https://github.com/SashaPog/azure-keyvault-grafana-stack.git)
    cd Azure-Playground
    ```
+
+   
 
 2. Create `.env` file:
    ```env
