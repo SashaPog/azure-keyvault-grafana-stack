@@ -9,5 +9,5 @@ pool:
 steps:
   - script: |
       echo "Вміст файлу test.txt:"
-      cat test.txt
+      type  test.txt
     displayName: "Read test.txt file"
