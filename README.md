@@ -56,6 +56,7 @@ export PROFILE=dev
 ./mvnw spring-boot:run
 ```
 
+
 **Option 2: Environment Variables**
 ```bash
 export PROFILE=dev
